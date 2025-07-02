@@ -112,6 +112,7 @@ import android.provider.OpenableColumns
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.foundation.layout.align
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -390,15 +391,17 @@ fun InspectionCameraScreen(navController: NavHostController) {
                     val outputOptions = ImageCapture.OutputFileOptions.Builder(file).build()
                     imageCapture?.takePicture(
                         outputOptions,
-                        ContextCompat.getMainExecutor(context)
-                    ) { result ->
-                        if (result.savedUri != null) {
-                            capturedUri = result.savedUri
-                        } else {
-                            capturedUri = Uri.fromFile(file)
+                        ContextCompat.getMainExecutor(context),
+                        object : ImageCapture.OnImageSavedCallback {
+                            override fun onImageSaved(output: ImageCapture.OutputFileResults) {
+                                capturedUri = output.savedUri ?: Uri.fromFile(file)
+                                fetchLocation()
+                            }
+                            override fun onError(exc: ImageCaptureException) {
+                                Toast.makeText(context, "Photo capture failed: ${exc.message}", Toast.LENGTH_SHORT).show()
+                            }
                         }
-                        fetchLocation()
-                    }
+                    )
                 },
                 shape = RoundedCornerShape(50),
                 modifier = Modifier
@@ -541,7 +544,7 @@ fun ProjectDetailScreen(navController: NavHostController, projectId: String?) {
     val context = LocalContext.current
     val projectViewModel: ProjectViewModel = viewModel()
     val photoViewModel: PhotoViewModel = viewModel()
-    val project = projectId?.toLongOrNull()?.let { projectViewModel.allProjects.value.find { it.id == it } }
+    val project = projectId?.toLongOrNull()?.let { id -> projectViewModel.allProjects.value.find { it.id == id } }
     val photos = projectId?.toLongOrNull()?.let { photoViewModel.getPhotosByProjectId(it).collectAsState().value } ?: emptyList()
 
     Column(modifier = Modifier
