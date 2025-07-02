@@ -96,7 +96,7 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
-import androidx.camera.core.Preview
+import androidx.camera.core.Preview as CameraPreview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.compose.runtime.getValue
@@ -109,6 +109,9 @@ import androidx.core.content.ContextCompat
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import android.provider.OpenableColumns
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -141,9 +144,7 @@ fun AppNavHost(navController: NavHostController) {
 
 @Composable
 fun DashboardScreen(navController: NavHostController) {
-    val projectViewModel: ProjectViewModel = viewModel(factory = androidx.lifecycle.viewmodel.initializer {
-        ProjectViewModel(androidx.compose.ui.platform.LocalContext.current.applicationContext as android.app.Application)
-    })
+    val projectViewModel: ProjectViewModel = viewModel()
     val projects = projectViewModel.allProjects.collectAsState()
 
     Column(modifier = Modifier.fillMaxSize()) {
@@ -190,9 +191,7 @@ fun DashboardScreen(navController: NavHostController) {
 @Composable
 fun ProjectCreateScreen(navController: NavHostController) {
     val context = LocalContext.current
-    val projectViewModel: ProjectViewModel = viewModel(factory = androidx.lifecycle.viewmodel.initializer {
-        ProjectViewModel(context.applicationContext as android.app.Application)
-    })
+    val projectViewModel: ProjectViewModel = viewModel()
     var name by remember { mutableStateOf("") }
     var type by remember { mutableStateOf("") }
     var location by remember { mutableStateOf("") }
@@ -294,9 +293,7 @@ fun ProjectCreateScreen(navController: NavHostController) {
 fun InspectionCameraScreen(navController: NavHostController) {
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
-    val photoViewModel: PhotoViewModel = viewModel(factory = androidx.lifecycle.viewmodel.initializer {
-        PhotoViewModel(context.applicationContext as android.app.Application)
-    })
+    val photoViewModel: PhotoViewModel = viewModel()
     val fusedLocationClient = remember { LocationServices.getFusedLocationProviderClient(context) }
 
     var hasCameraPermission by remember {
@@ -362,7 +359,7 @@ fun InspectionCameraScreen(navController: NavHostController) {
                     val cameraProviderFuture = ProcessCameraProvider.getInstance(ctx)
                     cameraProviderFuture.addListener({
                         val cameraProvider = cameraProviderFuture.get()
-                        val preview = Preview.Builder().build().also {
+                        val preview = CameraPreview.Builder().build().also {
                             it.setSurfaceProvider(previewView.surfaceProvider)
                         }
                         imageCapture = ImageCapture.Builder().build()
@@ -484,12 +481,8 @@ fun InspectionCameraScreen(navController: NavHostController) {
 @Composable
 fun MapScreen(navController: NavHostController) {
     val context = LocalContext.current
-    val photoViewModel: PhotoViewModel = viewModel(factory = androidx.lifecycle.viewmodel.initializer {
-        PhotoViewModel(context.applicationContext as android.app.Application)
-    })
-    val projectViewModel: ProjectViewModel = viewModel(factory = androidx.lifecycle.viewmodel.initializer {
-        ProjectViewModel(context.applicationContext as android.app.Application)
-    })
+    val photoViewModel: PhotoViewModel = viewModel()
+    val projectViewModel: ProjectViewModel = viewModel()
     val allPhotos = photoViewModel.allPhotos.collectAsState().value
     val allProjects = projectViewModel.allProjects.collectAsState().value
     var selectedPhoto by remember { mutableStateOf<com.example.inspectorviewapp.data.Photo?>(null) }
@@ -546,12 +539,8 @@ fun MapScreen(navController: NavHostController) {
 @Composable
 fun ProjectDetailScreen(navController: NavHostController, projectId: String?) {
     val context = LocalContext.current
-    val projectViewModel: ProjectViewModel = viewModel(factory = androidx.lifecycle.viewmodel.initializer {
-        ProjectViewModel(context.applicationContext as android.app.Application)
-    })
-    val photoViewModel: PhotoViewModel = viewModel(factory = androidx.lifecycle.viewmodel.initializer {
-        PhotoViewModel(context.applicationContext as android.app.Application)
-    })
+    val projectViewModel: ProjectViewModel = viewModel()
+    val photoViewModel: PhotoViewModel = viewModel()
     val project = projectId?.toLongOrNull()?.let { projectViewModel.allProjects.value.find { it.id == it } }
     val photos = projectId?.toLongOrNull()?.let { photoViewModel.getPhotosByProjectId(it).collectAsState().value } ?: emptyList()
 
