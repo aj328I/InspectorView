@@ -3,8 +3,13 @@
     <string name="app_name">InspectorViewApp</string>
     <string name="heading_format">Heading: %1$d°</string>
     <string name="gps_format">GPS: %1$s, %2$s</string>
+    <string name="timestamp_format">%1$tY-%1$tm-%1$td %1$tH:%1$tM:%1$tS</string>
     <string name="camera_permission_denied">Camera permission denied</string>
     <string name="location_permission_denied">Location permission denied</string>
     <string name="settings">Settings</string>
     <string name="close">Close</string>
+    <string name="dummy_latitude">37.42</string>
+    <string name="dummy_longitude">-122.08</string>
+    <string name="dummy_heading">319</string>
+    <string name="dummy_timestamp">2025-07-02 14:34:41</string>
 </resources>

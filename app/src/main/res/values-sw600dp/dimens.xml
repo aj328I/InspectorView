@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="shutter_button_size">96dp</dimen>
+    <dimen name="icon_size">32dp</dimen>
+    <dimen name="text_size_large">20sp</dimen>
+    <dimen name="text_size_small">16sp</dimen>
+    <dimen name="spacing_small">16dp</dimen>
+    <dimen name="spacing_xsmall">8dp</dimen>
+    <dimen name="shutter_button_elevation">8dp</dimen>
+    <dimen name="shutter_button_border">3dp</dimen>
+    <!-- Tablet-specific overrides for sw600dp -->
+</resources> 

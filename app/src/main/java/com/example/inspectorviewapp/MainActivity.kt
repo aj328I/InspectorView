@@ -10,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.example.inspectorviewapp.ui.theme.InspectorViewAppTheme
+import com.example.inspectorviewapp.ui.StartScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -18,15 +19,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             InspectorViewAppTheme {
-                Box(
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(
-                        text = "Hello World",
-                        style = MaterialTheme.typography.headlineMedium
-                    )
-                }
+                StartScreen()
             }
         }
     }
