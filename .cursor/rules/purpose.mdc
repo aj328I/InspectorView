@@ -1,0 +1,54 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+InspectorViewApp: Project Status, Intended Purpose, and MVP
+1. Project Status
+Structure:
+The project follows a modern Android multi-module architecture, with clear separation into app, data, domain, and ui modules. The codebase is organized by feature and follows MVVM (Model-View-ViewModel) principles.
+Technologies:
+Language: Kotlin
+UI: Jetpack Compose
+Dependency Injection: Hilt
+Testing: JUnit, Mockito
+Linting: ktlint, Android lint
+Current Progress:
+Core modules and directories are scaffolded.
+Key files for database (Room), ViewModels, and UI screens exist.
+Some files are untracked or recently modified, indicating active development.
+The project is not yet feature-complete but has foundational elements in place.
+2. Intended Purpose
+InspectorViewApp is designed to assist users—likely inspectors or field workers—in managing projects and capturing photographic evidence or documentation.Key features inferred from the codebase:
+Project Management:
+Users can create, view, and manage inspection projects.
+Photo Capture & Storage:
+Users can take photos (possibly of inspection sites or items) and associate them with projects.
+Data Persistence:
+Uses Room database for storing projects and photos locally.
+Modern Android Experience:
+Utilizes Jetpack Compose for a responsive, modern UI.
+3. Minimum Viable Product (MVP)
+The MVP for InspectorViewApp likely includes:
+Project List & Details:
+View a list of inspection projects.
+Add new projects.
+View project details.
+Photo Capture & Association:
+Capture photos using the device camera.
+Attach photos to specific projects.
+View photos within project details.
+Local Data Storage:
+Persist projects and photos using Room database.
+Basic CRUD operations for projects and photos.
+Basic Navigation & UI:
+Start screen for navigation.
+Compose-based UI for smooth user experience.
+Error Handling & Logging:
+Robust error handling with user-friendly messages.
+Logging for debugging (using Timber).
+Testing & Linting:
+Unit tests for ViewModels and repositories.
+Code quality enforced via linting tools.
+Summary: InspectorViewApp is a modern, modular Android application aimed at helping users manage inspection projects and photographic documentation. The project is in active development, with foundational architecture and core features scaffolded. The MVP will enable users to create projects, capture and store photos, and manage this data locally with a clean, Compose-based UI.
+

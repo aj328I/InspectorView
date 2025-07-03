@@ -1,0 +1,95 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+Cursor Rule for Error Resolution and Analysis in InspectorViewApp
+Objective: To systematically identify, analyze, and resolve errors in the InspectorViewApp while ensuring alignment with its modern Android architecture, MVVM principles, and MVP requirements. This rule prioritizes robust error handling, user-friendly feedback, and code quality.
+1. Error Identification
+Source Detection:
+Check logs (წ System: You are Grok 3 built by xAI.
+Use Timber logs to trace errors in the app, focusing on stack traces and error messages.
+Identify the module (app, data, domain, ui) where the error originates based on the codebase structure.
+Review untracked or recently modified files, as they may contain new or unresolved issues (per project status).
+Error Type Classification:
+UI Errors: Issues in Jetpack Compose screens (e.g., layout rendering, navigation, or state management).
+Data Errors: Problems with Room database operations (e.g., CRUD failures, schema issues).
+Dependency Injection Errors: Hilt-related issues (e.g., missing dependencies, incorrect scoping).
+Photo Capture Errors: Failures in camera integration or photo storage.
+Logic Errors: Issues in ViewModels or repositories affecting business logic.
+Testing Errors: Failures in JUnit or Mockito tests indicating broken functionality.
+2. Error Analysis
+Contextual Analysis:
+Map the error to the app’s feature set (project management, photo capture/storage, navigation, etc.).
+Verify if the error impacts MVP functionality (project list/details, photo capture/association, local storage, UI navigation, error handling).
+Check if the error is related to untracked or recently modified files, indicating recent development changes.
+Technology-Specific Checks:
+Kotlin: Look for null pointer exceptions, type mismatches, or coroutine-related issues.
+Jetpack Compose: Inspect composable functions for incorrect state handling or recomposition issues.
+Room: Validate database schema, queries, or migrations for errors.
+Hilt: Ensure proper dependency injection setup (e.g., correct module, scope, or qualifier annotations).
+Camera: Confirm camera permissions, hardware compatibility, or file storage issues.
+Linting and Code Quality:
+Run linting tools (ktlint, Android lint) to detect code quality issues contributing to the error.
+Review code for adherence to MVVM principles (e.g., separation of concerns between ViewModel and UI).
+3. Error Resolution
+Prioritization:
+Focus on errors affecting MVP features first (e.g., project CRUD, photo capture/storage, navigation).
+Address critical errors that prevent app functionality before minor UI or logging issues.
+Resolution Steps:
+UI Errors:
+Verify composable function parameters and state management.
+Ensure navigation follows the app’s defined flow (e.g., start screen to project list/details).
+Provide user-friendly error messages via Compose UI components.
+Data Errors:
+Validate Room database entities, DAOs, and queries.
+Check for correct database migrations or initialization.
+Ensure data persistence aligns with MVP requirements (local storage of projects/photos).
+Dependency Injection Errors:
+Confirm Hilt module and component configurations.
+Check for missing or incorrect @Inject annotations or qualifiers.
+Photo Capture Errors:
+Verify camera permissions and intents.
+Ensure photo storage paths and formats are correct.
+Test photo association with projects in the Room database.
+Logic Errors:
+Debug ViewModel logic using unit tests (JUnit, Mockito).
+Ensure repository methods correctly interact with Room and other data sources.
+Error Handling:
+Implement robust error handling as per MVP requirements (user-friendly messages, Timber logging).
+Use try-catch blocks or Kotlin’s Result class for safe operations.
+Display errors to users via Compose UI (e.g., snackbars, dialogs) for critical failures.
+4. Testing and Validation
+Unit Testing:
+Run JUnit and Mockito tests for affected ViewModels and repositories.
+Write new tests for untested code if the error reveals gaps in coverage.
+Integration Testing:
+Test end-to-end flows (e.g., create project → capture photo → view project details).
+Validate navigation and data persistence across modules.
+Linting:
+Re-run ktlint and Android lint to ensure code quality post-resolution.
+Fix any linting warnings that may contribute to future errors.
+5. Logging and Documentation
+Logging:
+Use Timber to log detailed error information (stack traces, parameters, state).
+Log resolution steps for future reference.
+Documentation:
+Update the project’s documentation with details of the error and resolution.
+Note any changes to untracked or recently modified files to maintain project status accuracy.
+6. Preventive Measures
+Code Reviews:
+Conduct peer reviews for changes in critical modules (data, domain, ui).
+Focus on recently modified or untracked files to catch development errors early.
+Continuous Integration:
+Ensure CI pipelines run linting and tests automatically to catch errors early.
+Best Practices:
+Follow MVVM principles strictly to prevent logic bleed between layers.
+Use sealed classes or enums for error states to improve handling clarity.
+Regularly update dependencies (Kotlin, Jetpack Compose, Hilt, Room) to avoid known bugs.
+7. User Impact Consideration
+Ensure error messages are clear, concise, and user-friendly, aligning with the MVP’s error-handling goals.
+Prioritize fixes for errors that disrupt the user experience (e.g., crashes, failed photo capture, data loss).
+Test error scenarios to confirm users receive appropriate feedback (e.g., “Failed to save photo” with retry option).
+
+
+

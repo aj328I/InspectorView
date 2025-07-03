@@ -1,0 +1,18 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+Generate and implement using Kotlin and Jetpack Compose, following these guidelines:
+1. Use MVVM architecture with a multi-module setup (:app, :data, :domain, :ui).
+2. Follow Kotlin coding conventions (immutability, sealed classes, safe null handling).
+3. Use Hilt for dependency injection, with clear module definitions.
+4. Implement robust error handling with Result types and Timber logging ".
+5. Write modular, reusable composables with state managed in ViewModels.
+6. Organize code by feature (e.g., com.example.app.feature.user).
+7. Include unit tests for ViewModels and Repositories using JUnit and Mockito.
+8. Add KDoc for public APIs and concise comments for complex logic.
+9. Ensure linting with ktlint and Android lint rules.
+10. Log errors with stack traces in debug builds and user-friendly messages in the UI.
+
+
